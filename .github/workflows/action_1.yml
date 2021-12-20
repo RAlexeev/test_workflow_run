@@ -16,3 +16,4 @@ jobs:
         shell: bash
         run: |
           echo "Hello World from action_1"
+          exit 1
