@@ -1,0 +1,31 @@
+name: Action_2 Name
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/action_2.yml'
+  workflow_run:
+    workflows: ["Action_1 Name"]
+    types:
+      - completed
+
+jobs:
+  check_action_dependencies:
+    name: Check action dependencies/triggers
+    runs-on: [ubuntu-latest]
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' || github.event_name == 'push'}}
+    steps:
+      - name: Return success
+        run: exit 0
+
+  build:
+    name: Build_2
+    needs: check_action_dependencies
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Debug_2
+        shell: bash
+        run: |
+          echo "Hello World from action_2"

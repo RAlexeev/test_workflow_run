@@ -1,0 +1,18 @@
+name: Action_1 Name
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/action_1.yml'
+
+jobs:
+  build:
+    name: Build_1
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Debug_1
+        shell: bash
+        run: |
+          echo "Hello World from action_1"
